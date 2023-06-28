@@ -97,8 +97,8 @@ function esPalabraReservada(lexema) {
       return 'DIVIDIR';
     case 'SI':
       return 'SI';
-    case 'ENTONCES':
-      return 'ENTONCES';
+    case 'SINOA':
+      return 'SINOA';
     case 'SINO':
       return 'SINO';
     default:
@@ -107,7 +107,7 @@ function esPalabraReservada(lexema) {
 }
 %}
 
-%token PROGRAMA ID INICIO FIN NUM ASIGNAR SUMAR RESTAR MULTIPLICAR DIVIDIR SI ENTONCES SINO MAYOR SALTARF
+%token PROGRAMA ID INICIO FIN NUM ASIGNAR SUMAR RESTAR MULTIPLICAR DIVIDIR SI SINOA SINO MAYOR SALTARF
 
 %%
 
@@ -121,7 +121,7 @@ listaInstr: instr listaInstr
   |
   ;
 
-instr: SI cond ENTONCES bloque
+instr: SI cond SINOA bloque
   {
     const i = cx;
     generaCodigo('SALTARF', cond, '?', '-');
@@ -306,3 +306,42 @@ function parse() {
 parse();
 
 export default parse;
+
+///if - else
+
+
+
+
+/// if -else(anidado)
+
+// variable x:5;
+// variable y:6;
+
+// si(y == x)
+//   iniciar
+//            y: y + 1;
+//   terminar
+// sinoa(y == 2)
+//   iniciar
+//           x: x + y;
+//   terminar
+// sino
+//   iniciar
+//            x: x -1 +y;
+//   terminar
+// x
+
+
+///for
+
+// variable i:0;
+// para(i; i <3; i++)
+//  iniciar
+//      imprimir i);
+//  terminar
+
+
+
+
+
+

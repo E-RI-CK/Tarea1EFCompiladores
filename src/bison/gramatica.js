@@ -75,8 +75,8 @@ var gramatica = (function(){
 var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[2,3],$V2=[1,8],$V3=[1,16],$V4=[1,15],$V5=[1,21],$V6=[5,9,12,14,19,20],$V7=[5,9,12];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"S":3,"PROGRAMA":4,"ID":5,";":6,"INICIO":7,"listaInstr":8,"FIN":9,".":10,"instr":11,"SI":12,"cond":13,"ENTONCES":14,"bloque":15,":":16,"=":17,"expr":18,">":19,"+":20,"term":21,"NUM":22,"$accept":0,"$end":1},
-terminals_: {2:"error",4:"PROGRAMA",5:"ID",6:";",7:"INICIO",9:"FIN",10:".",12:"SI",14:"ENTONCES",16:":",17:"=",19:">",20:"+",22:"NUM"},
+symbols_: {"error":2,"S":3,"PROGRAMA":4,"ID":5,";":6,"INICIO":7,"listaInstr":8,"FIN":9,".":10,"instr":11,"SI":12,"cond":13,"SINOA":14,"bloque":15,":":16,"=":17,"expr":18,">":19,"+":20,"term":21,"NUM":22,"$accept":0,"$end":1},
+terminals_: {2:"error",4:"PROGRAMA",5:"ID",6:";",7:"INICIO",9:"FIN",10:".",12:"SI",14:"SINOA",16:":",17:"=",19:">",20:"+",22:"NUM"},
 productions_: [0,[3,7],[8,2],[8,0],[11,4],[11,4],[15,3],[15,1],[13,3],[18,3],[18,1],[21,1],[21,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
@@ -366,8 +366,8 @@ function esPalabraReservada(lexema) {
       return 'SUMAR';
     case 'SI':
       return 'SI';
-    case 'ENTONCES':
-      return 'ENTONCES';
+    case 'SINOA':
+      return 'SINOA';
     default:
       return 'ID';
   }
@@ -415,7 +415,7 @@ function yylex() {
 
 // Simula getchar() en el entorno de ejecución
 function getchar() {
-  const input = 'PROGRAMA id ; INICIO SI 2 > 1 ENTONCES INICIO id : = 10 + 5 FIN FIN .';
+  const input = 'PROGRAMA id ; INICIO SI 2 > 1 SINOA INICIO id : = 10 + 5 FIN FIN .';
   getchar.pos = getchar.pos || 0;
   if (getchar.pos < input.length) {
     return input[getchar.pos++];
@@ -439,7 +439,7 @@ function isAlnum(c) {
   return isDigit(c) || isAlpha(c);
 }
 
-const input = 'PROGRAMA id ; INICIO SI 2 > 1 ENTONCES INICIO id : = 10 + 5 FIN FIN .';
+const input = 'PROGRAMA id ; INICIO SI 2 > 1 SINOA INICIO id : = 10 + 5 FIN FIN .';
 const result = yyparse(input);
 
 console.log(result === 0 ? 'Cadena válida' : 'Cadena inválida');
